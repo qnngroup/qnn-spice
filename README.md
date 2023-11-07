@@ -78,7 +78,7 @@ everyone has these changes!
 ## Installation
 
 You should be able to install this repository by cloning it 
-(`git clone git@github.com:tareqdandachi/qnn-spice.git`) and then running the
+(`git clone git@github.com:qnngroup/qnn-spice.git`) and then running the
 `update` script using `./update` (or `./update [PATH-TO-LTSPICE-LIB-FILE]`) when
 in the qnn-spice directory.
 
