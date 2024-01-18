@@ -84,7 +84,7 @@ in the qnn-spice directory.
 
 ## Troubleshooting
 
-- On windows, if the update scripts gives you an `OSError` regarding permissions, then
+- On windows, if the update scripts gives you an `OSError` regarding permissions (e.g. OSError 1314), then
 relaunch git bash as an administrator (Run Program as Administrator).
 - If you get a permission error saying you can't run `./update`, you might need to run
 `chmod +x update` in the `qnn-spice` directory to give the update script execution
