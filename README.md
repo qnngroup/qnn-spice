@@ -42,6 +42,10 @@ all the latest changes from all available repos and sync the
 files in `models.md` to your local LTSpice directory, so you can
 access all the models as in the Example.
 
+Note, `./update` does not create symlinks in Windows.  In Windows you'll need to copy
+the model files into the right directories by hand.  You can still run update and it will
+give you instructions on how to proceed.
+
 #### How to push changes to a model?
 
 Just like how you would push to a regular github repo, go into the repo with your 
