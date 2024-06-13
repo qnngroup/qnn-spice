@@ -18,7 +18,12 @@ if [ $# -eq 0 ]
         ;;
 
     Linux)
-        LTSPICE_LIB_PATH="$HOME/Documents/LTspiceXVII/lib"
+	if [ -f "/etc/wsl.conf" ]
+	   then
+  	       LTSPICE_LIB_PATH="$(wslpath "$(wslvar USERPROFILE)\AppData\Local\LTspice\lib")"
+	else
+	   LTSPICE_LIB_PATH="$HOME/Documents/LTspiceXVII/lib"
+	fi
         ;;
 
     CYGWIN | MINGW)
