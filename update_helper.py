@@ -1,16 +1,29 @@
 import sys
 import os
 import shutil
+from pathlib import Path
 
 # Move to using similar to any(ext in name for ext in [".asy", ".lib"])
 # for all types of lib and asy..
 
 is_file = lambda name: any(ext in name for ext in [".asy", ".lib", ".asc"])
 
-if __name__=="__main__":
+def make_symlink(source, destination, wsl) :
+    # make symlink unless using wsl, in which case copy files
+    if wsl:
+        shutil.copy(source, destination)
+    else:
+        os.symlink(source, destination)
     
+
+
+if __name__=="__main__":
+   
+    wsl = "--wsl" in sys.argv  # check if executing from wsl, in which case no links, just copy files
     if sys.argv[1] == "--update-symlinks":
-        
+        if wsl :
+            print("Your files are being copied, not linked")
+
         LTSPICE_LIB_PATH = sys.argv[2]
         
         os.makedirs(LTSPICE_LIB_PATH+"/sym/qnn-spice", exist_ok=True)
@@ -85,7 +98,8 @@ if __name__=="__main__":
                 
                 os.makedirs(LTSPICE_LIB_PATH + "/sym/qnn-spice/" + dest, exist_ok=True)
 
-                os.symlink(os.getcwd() + "/" + src, LTSPICE_LIB_PATH + "/sym/qnn-spice/" + dest + dest_filename)
+                # copies if in wsl
+                make_symlink(os.getcwd() + "/" + src, LTSPICE_LIB_PATH + "/sym/qnn-spice/" + dest + dest_filename, wsl)
                 
                 print("    ADDED:", dest_filename)
             
@@ -95,14 +109,14 @@ if __name__=="__main__":
                 
                 inner_symlink = LTSPICE_LIB_PATH + "/sub/qnn-spice/" + dest + dest_filename
 
-                os.symlink(os.getcwd() + "/" + src, inner_symlink)
+                make_symlink(os.getcwd() + "/" + src, inner_symlink, wsl)  # copies if in wsl
                 
                 outer_symlink = LTSPICE_LIB_PATH + "/sub/" + dest_filename.split("/")[-1]
                 
                 if os.path.exists(outer_symlink):
-                    os.unlink(outer_symlink)
+                    Path(outer_symlink).unlink(missing_ok=True)
                     
-                os.symlink(inner_symlink, outer_symlink)
+                make_symlink(inner_symlink, outer_symlink, wsl)
                 
                 print("    ADDED:", dest_filename)
                 

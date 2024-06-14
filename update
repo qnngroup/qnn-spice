@@ -82,4 +82,9 @@ git submodule foreach "git pull || true"
 echo
 
 # runs the update_helper python script on every subdirectory
-git submodule foreach python3 ../update_helper.py --update-symlinks "${LTSPICE_LIB_PATH}"
+if [ -f "/etc/wsl.conf" ] 
+then
+   git submodule foreach python3 ../update_helper.py --update-symlinks "${LTSPICE_LIB_PATH}" --wsl   
+else
+   git submodule foreach python3 ../update_helper.py --update-symlinks "${LTSPICE_LIB_PATH}"
+fi
