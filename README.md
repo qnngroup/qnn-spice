@@ -42,9 +42,11 @@ all the latest changes from all available repos and sync the
 files in `models.md` to your local LTSpice directory, so you can
 access all the models as in the Example.
 
-Note, `./update` does not create symlinks in Windows.  In Windows you'll need to copy
-the model files into the right directories by hand.  You can still run update and it will
-give you instructions on how to proceed.
+Note, `./update` creates symlinks in Windows only if the path to the
+LTSpice directory is supplied as a commandline argument. Note that if
+you are using WSL instead of cygwin/minGW, then `update_helper.py`
+*will not* create symlinks so whenever you modify any model files
+(locally or by pulling in upstream changes), you'll need to rerun `./update`
 
 #### How to push changes to a model?
 
@@ -88,8 +90,10 @@ in the qnn-spice directory.
 
 ## Troubleshooting
 
-- On windows, if the update scripts gives you an `OSError` regarding permissions (e.g. OSError 1314), then
-relaunch git bash as an administrator (Run Program as Administrator).
+- On windows, creation of symlinks by users is disabled by default, so the update
+script will likely give you an `OSError` regarding permissions (e.g. OSError 1314).
+In this case, either enable developer mode, or just relaunch git bash as an administrator
+(Run Program as Administrator).
 - If you get a permission error saying you can't run `./update`, you might need to run
 `chmod +x update` in the `qnn-spice` directory to give the update script execution
 permissions.
