@@ -7,3 +7,6 @@
 [submodule "equipment-spice"]
 	path = equipment-spice
 	url = git@github.com:qnngroup/equipment-spice.git
+[submodule "ntron-spice"]
+	path = ntron-spice
+	url = git@github.com:qnngroup/ntron-spice
