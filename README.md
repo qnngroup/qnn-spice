@@ -90,6 +90,7 @@ in the qnn-spice directory.
 
 ## Troubleshooting
 
+- Models are written for and tested with LTspice XVII. Some models may not work in the newest versions of LTspice.
 - On windows, creation of symlinks by users is disabled by default, so the update
 script will likely give you an `OSError` regarding permissions (e.g. OSError 1314).
 In this case, either enable developer mode, or just relaunch git bash as an administrator
