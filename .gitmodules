@@ -10,3 +10,6 @@
 [submodule "ntron-spice"]
 	path = ntron-spice
 	url = git@github.com:qnngroup/ntron-spice
+[submodule "htron-spice"]
+	path = htron-spice
+	url = git@github.com:qnngroup/htron-spice.git
